@@ -21,13 +21,13 @@ export default class Home extends React.Component {
         console.log(this.state.name, this.state.description);
 
         $.ajax({
-            method: "POST",
             url: "http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project",
-            headers: {"Content-Type": "application/json"},
-            data: {
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
                 name: this.state.name,
                 description: this.state.description
-            }
+            })
         })
         .done(res => {
             let json = $.parseJSON(res);

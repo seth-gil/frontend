@@ -13,7 +13,7 @@ export default class Project extends React.Component {
     }
 
     componentDidMount() {
-        $.getJSON(`http://192.168.1.113:5000/api/v1/project/${this.state.id}`)
+        $.getJSON(`http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project/${this.state.id}`)
         .done((data) => {
             this.setState({data, loaded: true});
         })
@@ -33,7 +33,7 @@ export default class Project extends React.Component {
                                 {this.state.data.description}
                             </p>
                             <video autoplay loop class="embed-responsive-item">
-                                <source src={require(`../../python/${this.state.data.id}/preview.mp4`)} type="video/mp4" />
+                                <source src={`../../backend/${this.state.data.id}/preview.mp4`} type="video/mp4" />
                             </video>
                             <hr/>
                         </section>

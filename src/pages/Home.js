@@ -29,10 +29,9 @@ export default class Home extends React.Component {
                 description: this.state.description
             })
         })
-        .done(res => {
-            let json = $.parseJSON(res);
-            this.props.history.push(`/project/${json.id}`);
-            console.log("response", json);
+        .done(id => {
+            this.props.history.push(`/project/${id}`);
+            console.log("ID:", id);
         })
         .fail(err => {
             console.error(err);

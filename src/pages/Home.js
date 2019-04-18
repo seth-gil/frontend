@@ -13,15 +13,21 @@ export default class Home extends React.Component {
         }
 
         this.name = React.createRef();
+        this.description = React.createRef();
     }
     
 
     handleSubmit(event) {
         event.preventDefault();
         
-        $.post("http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project", {
-            name: this.name,
-            description: this.description
+        $.ajax({
+            type: "post",
+            url: "http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project",
+            contentType: "application/json",
+            data: {
+                name: this.name.current.value,
+                description: this.description.current.value
+            }
         })
         .done(res => {
             let json = $.parseJSON(res);

@@ -73,6 +73,7 @@ export default class Home extends React.Component {
                                     Describe your new project
                                 </Form.Label>
                                 <Form.Control ref={this.description} as="textarea" rows="3" placeholder="Enter project description"/>
+                            </Form.Group>
                             <Form.Group>
                                 <Button type="submit">
                                     Create

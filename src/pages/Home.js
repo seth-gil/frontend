@@ -19,7 +19,10 @@ export default class Home extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         
-        $.post("http://192.168.1.113:5000/api/v1/project", {name: this.name})
+        $.post("http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project", {
+            name: this.name,
+            description: this.description
+        })
         .done(res => {
             let json = $.parseJSON(res);
             this.props.history.push(`/project/${json.id}`);
@@ -65,6 +68,11 @@ export default class Home extends React.Component {
                                 </Form.Label>
                                 <Form.Control ref={this.name} type="text" placeholder="Enter project name"/>
                             </Form.Group>
+                            <Form.Group>
+                                <Form.Label>
+                                    Describe your new project
+                                </Form.Label>
+                                <Form.Control ref={this.description} as="textarea" rows="3" placeholder="Enter project description"/>
                             <Form.Group>
                                 <Button type="submit">
                                     Create

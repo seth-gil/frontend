@@ -6,10 +6,15 @@ import ImageInput from '../components/ImageInput';
 import Col from "react-bootstrap/Col";
 
 export default class Upload extends React.Component {
-  state = {
-    files: null,
-    id: "default"
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      files: null,
+      framerate: 30,
+      id: props.id
+    };
+  }
 
   handleFileSelect = (event) => {
     console.log("e.t.f", event.target.files);
@@ -29,19 +34,20 @@ export default class Upload extends React.Component {
       formData.append("files[]", fileList.item(index), index + ".jpg");	
     }
     formData.append("id", this.state.id);
+    formData.append("framerate", this.state.framerate);
   
     fetch("http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/upload", {
       method: 'POST',
       body: formData	
     }).then(function() {
       // Nothing returned
-      console.log("Success");
+      _this.props.success();
     }).catch(function(err) {
       console.log("Error", err);
     });
   }
 
-  handleProjectSelect(event) {
+  handleFramerateSelect(event) {
     let sel = event.target;
     this.setState({id: sel.options[sel.selectedIndex].value});
   }
@@ -51,7 +57,7 @@ export default class Upload extends React.Component {
     return (
       <Container style={{maxWidth: "600px"}}>
         <h2>Upload Images</h2>
-        <p>Choose a project and add some media to get started.</p>
+        <p>Upload your images to start the animation process.</p>
         <Form onSubmit={this.handleSubmit.bind(this)} encType="multipart/form-data">
           <Form.Row>
             <Col sm>
@@ -60,16 +66,17 @@ export default class Upload extends React.Component {
                 <ImageInput change={this.handleFileSelect.bind(this)} />
               </Form.Group>
             </Col>
-            {/* <Col sm>
+            <Col sm>
               <Form.Group>
-                <Form.Label>Choose project</Form.Label>
-                <Form.Control as="select" onChange={this.handleProjectSelect.bind(this)}>
-                  <option value="default">-- Please select --</option>
-                  <option value="12300">My First Project</option>
-                  <option value="23439">Lego Movie</option>
+                <Form.Label>Choose framerate (fps)</Form.Label>
+                <Form.Control as="select" onChange={this.handleFramerateSelect.bind(this)}>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
                 </Form.Control>
               </Form.Group>
-            </Col> */}
+            </Col>
           </Form.Row>
           <Button variant="primary" type="submit">
             Add Media

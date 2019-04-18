@@ -9,7 +9,8 @@ export default class Project extends React.Component {
         this.state = {
             id: props.match.params.id,
             loaded: false,
-            data: null
+            data: null,
+            video: null //  check in the future
         }
     }
 
@@ -24,23 +25,42 @@ export default class Project extends React.Component {
         });
     }
 
+    handleVideo = () => {
+        let id = this.state.id;
+        this.setState({video: `http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/${id}/preview.mp4`})
+    }
+
     render() {
         return (
             <main>
                 {
                     this.state.loaded ? (
                         <section>
-                            <h1>{this.state.data.name}</h1>
-                            <p>
-                                {this.state.data.description}
-                            </p>
+                            <section>
+                                <h1>{this.state.data.name}</h1>
+                                <p>
+                                    {this.state.data.description}
+                                </p>
+                                <hr/>
+                                <br/>
+                                <Upload id={this.state.id} success={this.handleVideo.bind(this)} />
+                            </section>
                             <hr/>
                             <br/>
-                            <Upload />
-                            {/* <p>Preview:</p>
-                            <video controls class="embed-responsive-item">
-                                <source src={`http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/${this.state.data.id}/preview.mp4`} type="video/mp4" />
-                            </video> */}
+                            <section style={{marginTop: "10px"}}>
+                                {
+                                    this.state.video ? (
+                                        <section>
+                                            <p>Preview:</p>
+                                            <video width="400px" height="300px" controls className="embed-responsive-item">
+                                                <source src={this.state.video} type="video/mp4" />
+                                            </video>
+                                        </section>
+                                    ) : (
+                                        <p><i>No video content yet.</i></p>
+                                    )
+                                }
+                            </section>
                         </section>
                     ) : (
                         <p>Loading project data...</p>

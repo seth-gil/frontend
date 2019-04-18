@@ -9,13 +9,11 @@ export default class Home extends React.Component {
         super();
 
         this.state = {
-            modalShow: false
+            modalShow: false,
+            name: "default",
+            description: "default"
         }
-
-        this.name = React.createRef();
-        this.description = React.createRef();
     }
-    
 
     handleSubmit(event) {
         event.preventDefault();
@@ -24,8 +22,8 @@ export default class Home extends React.Component {
             method: "POST",
             url: "http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project",
             data: {
-                name: this.name.current.value,
-                description: this.description.current.value
+                name: this.state.name,
+                description: this.state.description
             }
         })
         .done(res => {
@@ -71,13 +69,13 @@ export default class Home extends React.Component {
                                 <Form.Label>
                                     What do you want to call your new project?
                                 </Form.Label>
-                                <Form.Control ref={this.name} type="text" placeholder="Enter project name"/>
+                                <Form.Control onChange={event => this.setState({name: event.target.value})} type="text" placeholder="Enter project name"/>
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>
                                     Describe your new project
                                 </Form.Label>
-                                <Form.Control ref={this.description} as="textarea" rows="3" placeholder="Enter project description"/>
+                                <Form.Control onChange={event => this.setState({description: event.target.value})} as="textarea" rows="3" placeholder="Enter project description"/>
                             </Form.Group>
                             <Form.Group>
                                 <Button type="submit">

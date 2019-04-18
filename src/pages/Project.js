@@ -33,7 +33,7 @@ export default class Project extends React.Component {
                                 {this.state.data.description}
                             </p>
                             <video autoplay loop class="embed-responsive-item">
-                                <source src={`../../backend/${this.state.data.id}/preview.mp4`} type="video/mp4" />
+                                <source src={`http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/${this.state.data.id}/preview.mp4`} type="video/mp4" />
                             </video>
                             <hr/>
                         </section>

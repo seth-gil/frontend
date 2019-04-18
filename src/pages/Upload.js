@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 import ImageInput from '../components/ImageInput';
 import Col from "react-bootstrap/Col";
 
@@ -48,7 +49,7 @@ export default class Upload extends React.Component {
   render() {
     console.log(this.state.id);
     return (
-      <section>
+      <Container style={{maxWidth: "600px"}}>
         <h2>Upload Images</h2>
         <p>Choose a project and add some media to get started.</p>
         <Form onSubmit={this.handleSubmit.bind(this)} encType="multipart/form-data">
@@ -59,7 +60,7 @@ export default class Upload extends React.Component {
                 <ImageInput change={this.handleFileSelect.bind(this)} />
               </Form.Group>
             </Col>
-            <Col sm>
+            {/* <Col sm>
               <Form.Group>
                 <Form.Label>Choose project</Form.Label>
                 <Form.Control as="select" onChange={this.handleProjectSelect.bind(this)}>
@@ -68,13 +69,13 @@ export default class Upload extends React.Component {
                   <option value="23439">Lego Movie</option>
                 </Form.Control>
               </Form.Group>
-            </Col>
+            </Col> */}
           </Form.Row>
           <Button variant="primary" type="submit">
             Add Media
           </Button>
         </Form>
-      </section>
+      </Container>
     );
   }
 }

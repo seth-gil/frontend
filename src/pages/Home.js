@@ -23,6 +23,8 @@ export default class Home extends React.Component {
         $.ajax({
             method: "POST",
             url: "http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project",
+            headers: {"Content-Type": "application/json"},
+            dataType: "json",
             data: {
                 name: this.state.name,
                 description: this.state.description

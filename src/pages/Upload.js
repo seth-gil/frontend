@@ -30,7 +30,7 @@ export default class Upload extends React.Component {
     }
     formData.append("id", this.state.id);
   
-    fetch("http://192.168.1.113:5000/api/v1/upload", {
+    fetch("http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/upload", {
       method: 'POST',
       body: formData	
     }).then(function() {

@@ -46,7 +46,7 @@ export default class NewProject extends React.Component {
                     $(images[index]).on("load", function() {
                         context.clearRect(0, 0, canvas.width, canvas.height);
                         context.drawImage(this, 0, 0, 600, 450);
-                        frames[index] = canvas.toDataURL('image/jpeg', 0.50);
+                        frames[index] = {time: file.lastModified, frame: canvas.toDataURL('image/jpeg', 0.50)};
                         _this.setFrames(frames);
                     });
                 };
@@ -75,17 +75,19 @@ export default class NewProject extends React.Component {
             // frames = frames.map(frame => {
             //     return frame.substr(23);
             // })
+
+            frames = frames.sort((a, b) => {
+                // Sort
+                if (a.time > b.time) return 1;
+                if (b.time > a.time) return -1;
+            }).map(frame => {
+                // Remove time key
+                return frame.frame;
+            });
+
             console.log(frames);
 
-            // let formData = new FormData();
-
-            // formData.append("name", this.state.name);
-            // formData.append("description", this.state.description);
-            // formData.append("framerate", this.state.framerate);
-
-            // for(var index = 0; index < frames.length; index++) {
-            //     formData.append("files[]", frames[index], index + ".jpg");	
-            // }
+            
             
             fetch(ROOT + "/api/v1/project", {
                 method: "POST",

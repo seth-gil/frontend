@@ -1,7 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import Container from "react-bootstrap/Container";
-import Upload from "./Upload";
+import { ROOT } from "../API";
 
 export default class Project extends React.Component {
     constructor(props) {
@@ -10,15 +10,16 @@ export default class Project extends React.Component {
         this.state = {
             id: props.match.params.id,
             loaded: false,
-            data: null,
-            video: null //  check in the future
+            data: null
         }
     }
 
     componentDidMount() {
-        $.getJSON(`http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project/${this.state.id}`)
+        $.getJSON(`${ROOT}/api/v1/project/${this.state.id}`)
         .done((data) => {
             console.log(data);
+            data.id = data._id.$oid;
+
             this.setState({data, loaded: true});
         })
         .fail((err) => {
@@ -26,14 +27,11 @@ export default class Project extends React.Component {
         });
     }
 
-    handleVideo = () => {
-        let id = this.state.id;
-        this.setState({video: `http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/${id}/preview.mp4`})
-    }
-
     render() {
+        console.log(this.state.data);
         return (
             <Container style={{maxWidth: "600px"}}>
+                
                 {
                     this.state.loaded ? (
                         <section>
@@ -44,23 +42,12 @@ export default class Project extends React.Component {
                                 </p>
                                 <hr/>
                                 <br/>
-                                <Upload id={this.state.id} success={this.handleVideo.bind(this)} />
                             </section>
-                            <hr/>
-                            <br/>
                             <section style={{marginTop: "10px"}}>
-                                {
-                                    this.state.video ? (
-                                        <section>
-                                            <p>Preview:</p>
-                                            <video width="400px" height="300px" controls className="embed-responsive-item">
-                                                <source src={this.state.video} type="video/mp4" />
-                                            </video>
-                                        </section>
-                                    ) : (
-                                        <p><i>No video content yet.</i></p>
-                                    )
-                                }
+                                <p>Preview:</p>
+                                <video style={{width: "100%"}} controls className="embed-responsive-item">
+                                    <source src={`${ROOT}/${this.state.id}/preview.mp4`} type="video/mp4" />
+                                </video>
                             </section>
                         </section>
                     ) : (

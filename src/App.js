@@ -3,7 +3,6 @@ import {Route} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navigator from "./components/Navigator";
 import Home from "./pages/Home";
-import Upload from "./pages/Upload";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 import NewProject from './pages/NewProject';

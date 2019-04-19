@@ -18,7 +18,8 @@ export default class NewProject extends React.Component {
             framerate: "default",
             frames: [],
             redirect: null,
-            pendingSubmit: false
+            pendingSubmit: false,
+            submitted: false
         }
     }
 
@@ -68,7 +69,7 @@ export default class NewProject extends React.Component {
     }
 
     componentDidUpdate() {
-        if((this.state.files.length == this.state.frames.length) && this.state.pendingSubmit) {
+        if((this.state.files.length == this.state.frames.length) && this.state.pendingSubmit && !this.state.submitted) {
             let _this = this,
                 frames = this.state.frames;
 
@@ -86,8 +87,6 @@ export default class NewProject extends React.Component {
             });
 
             console.log(frames);
-
-            
             
             fetch(ROOT + "/api/v1/project", {
                 method: "POST",
@@ -110,6 +109,8 @@ export default class NewProject extends React.Component {
             }).catch(err => {
                 console.log("Error", err);
             });
+
+            this.setState({submitted: true});
         }
      }
 

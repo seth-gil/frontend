@@ -100,7 +100,7 @@ export default class NewProject extends React.Component {
                     name: this.state.name,
                     description: this.state.description,
                     framerate: this.state.framerate,
-                    frames: this.state.frames
+                    frames: frames
                 })	
             }).then(res => {
                 res.text().then(function (id) {

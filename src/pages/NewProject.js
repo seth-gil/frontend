@@ -31,7 +31,7 @@ export default class NewProject extends React.Component {
             formData.append("files[]", files.item(index), index + ".jpg");	
         }
         
-        fetch("ttp://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project", {
+        fetch("http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project", {
             method: "POST",
             body: formData	
         }).then(id => {

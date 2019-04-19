@@ -1,41 +1,15 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-import $ from "jquery";
+import NewProject from "./NewProject";
 
 export default class Home extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            modalShow: false,
-            name: "default",
-            description: "default"
+            modalShow: false
         }
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        
-        console.log(this.state.name, this.state.description);
-
-        $.ajax({
-            url: "http://ec2-54-205-66-183.compute-1.amazonaws.com:5000/api/v1/project",
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                name: this.state.name,
-                description: this.state.description
-            })
-        })
-        .done(id => {
-            this.props.history.push(`/project/${id}`);
-            console.log("ID:", id);
-        })
-        .fail(err => {
-            console.error(err);
-        });
     }
 
     handleShow() {
@@ -66,25 +40,7 @@ export default class Home extends React.Component {
                         <Modal.Title>Let's get started!</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form onSubmit={this.handleSubmit.bind(this)}>
-                            <Form.Group>
-                                <Form.Label>
-                                    What do you want to call your new project?
-                                </Form.Label>
-                                <Form.Control onChange={event => this.setState({name: event.target.value})} type="text" placeholder="Enter project name"/>
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>
-                                    Describe your new project
-                                </Form.Label>
-                                <Form.Control onChange={event => this.setState({description: event.target.value})} as="textarea" rows="3" placeholder="Enter project description"/>
-                            </Form.Group>
-                            <Form.Group>
-                                <Button type="submit">
-                                    Create
-                                </Button>
-                            </Form.Group>
-                        </Form>
+                        <NewProject />
                     </Modal.Body>
                 </Modal>
             </main>

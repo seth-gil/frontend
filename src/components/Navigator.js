@@ -29,9 +29,9 @@ export default class Navigator extends React.Component {
                             </LinkContainer>
                         </Nav.Item>
                         <Nav.Item>
-                            <LinkContainer to="/upload/">
+                            <LinkContainer to="/new/">
                                 <Nav.Link>
-                                    Upload
+                                    New
                                 </Nav.Link>
                             </LinkContainer>
                         </Nav.Item>

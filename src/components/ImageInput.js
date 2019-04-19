@@ -33,7 +33,7 @@ export default class ImageInput extends React.Component {
                     name="request" 
                     multiple 
                     accept="image/*" 
-                    onChange={(event) => {this.getDisplayText(event); this.props.change(event)}} 
+                    onChange={(event) => {this.getDisplayText(event); this.props.onChange(event)}} 
                     />
                   <label className="custom-file-label">
                     {this.state.displayText}

@@ -1,5 +1,6 @@
 import React from "react";
 import $ from "jquery";
+import Container from "react-bootstrap/Container";
 import Upload from "./Upload";
 
 export default class Project extends React.Component {
@@ -32,7 +33,7 @@ export default class Project extends React.Component {
 
     render() {
         return (
-            <main>
+            <Container style={{maxWidth: "600px"}}>
                 {
                     this.state.loaded ? (
                         <section>
@@ -66,7 +67,7 @@ export default class Project extends React.Component {
                         <p>Loading project data...</p>
                     )
                 }
-            </main>
+            </Container>
         );
     }
 }

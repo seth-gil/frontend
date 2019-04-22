@@ -1,1 +1,1 @@
-export const ROOT = "http://ec2-54-205-66-183.compute-1.amazonaws.com:5000";
+export const ROOT = "http://ec2-54-88-231-19.compute-1.amazonaws.com";

@@ -46,7 +46,8 @@ export default class Project extends React.Component {
                             <section style={{marginTop: "10px"}}>
                                 <p>Preview:</p>
                                 <video style={{width: "100%"}} controls className="embed-responsive-item">
-                                    <source src={`${ROOT}/${this.state.id}/preview.mp4`} type="video/mp4" />
+                                    {/* <source src={`${ROOT}/${this.state.id}/preview.mp4`} type="video/mp4" /> */}
+                                    <source src={require(`${this.state.id}/preview.mp4`)} type="video/mp4" />
                                 </video>
                             </section>
                         </section>

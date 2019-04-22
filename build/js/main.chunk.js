@@ -10,7 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROOT", function() { return ROOT; });
-var ROOT = "http://ec2-54-205-66-183.compute-1.amazonaws.com:5000";
+var ROOT = "http://ec2-54-88-231-19.compute-1.amazonaws.com";
 
 /***/ }),
 

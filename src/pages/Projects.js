@@ -30,7 +30,7 @@ export default class Projects extends React.Component {
                 <CardColumns>
                     {
                         this.state.data ? (
-                            this.state.data.map((project, index) => {
+                            this.state.data.reverse().map((project, index) => {
                                 return React.createElement(
                                     GridBox, {...project, key: index}, null
                                 )

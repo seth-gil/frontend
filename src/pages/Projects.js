@@ -1,5 +1,4 @@
 import React from "react";
-import $ from "jquery";
 import GridBox from "../components/GridBox";
 import CardColumns from "react-bootstrap/CardColumns";
 import { ROOT } from "../API";

@@ -38,6 +38,8 @@ export default class NewProject extends React.Component {
     
         canvas = document.createElement('canvas');
         context = canvas.getContext('2d');
+        // canvas.width = 720;
+        // canvas.height = 480;
         canvas.width = 720;
         canvas.height = 480;
         
@@ -71,7 +73,7 @@ export default class NewProject extends React.Component {
                                 width, height);
                         }
                         // 50% compression
-                        frames[index] = {time: file.lastModified, frame: canvas.toDataURL('image/jpeg', 0.50)};
+                        frames[index] = {time: file.lastModified, frame: canvas.toDataURL('image/jpeg', 0.25)};
                         _this.setFrames(frames);
                     });
                 };
